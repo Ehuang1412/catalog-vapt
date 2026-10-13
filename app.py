@@ -3,6 +3,7 @@ import sqlite3
 import os
 
 app = Flask(__name__)
+app.config['PROPAGATE_EXCEPTIONS'] = True  
 app.secret_key = "dev-only-secret-change-in-production"
 
 DATABASE = "catalog.db"
