@@ -6,7 +6,9 @@ app = Flask(__name__)
 app.config['PROPAGATE_EXCEPTIONS'] = True  
 app.secret_key = "dev-only-secret-change-in-production"
 
-DATABASE = "catalog.db"
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE = os.path.join(BASE_DIR, "catalog.db")
 
 def get_db():
     conn = sqlite3.connect(DATABASE)
