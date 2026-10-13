@@ -91,7 +91,9 @@ def add_item():
     conn.commit()
     return redirect(url_for("admin"))
 
+# Initialize the database on startup (runs on both local and PythonAnywhere)
+if not os.path.exists(DATABASE):
+    init_db()
+
 if __name__ == "__main__":
-    if not os.path.exists(DATABASE):
-        init_db()
     app.run(debug=True)
