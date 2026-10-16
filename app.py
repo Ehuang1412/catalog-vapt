@@ -51,9 +51,9 @@ def search():
     query = request.args.get("q", "")
     conn = get_db()
     if query:
-        # ⚠️ VULNERABLE: f-string directly in SQL — SQL Injection here
-        sql = f"SELECT * FROM items WHERE name LIKE '%{query}%'"
-        results = conn.execute(sql).fetchall()
+        # ✅ FIXED: parameterized query
+        sql = "SELECT * FROM items WHERE name LIKE ?"
+        results = conn.execute(sql, (f"%{query}%",)).fetchall()
     else:
         results = []
     return render_template("search.html", results=results, query=query)
